@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: comeeatme
+    app.kubernetes.io/instance: comeeatme-server-deploy
+  name: comeeatme-server-deploy
+  namespace: comeeatme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: comeeatme-server-po
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: comeeatme
+        app.kubernetes.io/instance: comeeatme-server-po
+    spec:
+      imagePullSecrets:
+        - name: dockerhub-cred
+      containers:
+      - name: comeeatme-server-po
+        image: zooneon/comeeatme-backend:dev
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        envFrom:
+          - secretRef:
+              name: comeeatme-server-secret
