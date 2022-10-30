@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: comeeatme
+    app.kubernetes.io/instance: comeeatme-client-deploy
+  name: comeeatme-client-deploy
+  namespace: comeeatme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: comeeatme-client-po
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: comeeatme
+        app.kubernetes.io/instance: comeeatme-client-po
+    spec:
+      containers:
+      - name: comeeatme-client-po
+        image: zooneon/comeeatme-frontend:dev
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
