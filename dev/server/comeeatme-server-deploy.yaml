@@ -21,7 +21,7 @@ spec:
         - name: dockerhub-cred
       containers:
       - name: comeeatme-server-po
-        image: zooneon/comeeatme-backend:dev-63
+        image: zooneon/comeeatme-backend:dev-64
         imagePullPolicy: Always
         resources:
           requests:
