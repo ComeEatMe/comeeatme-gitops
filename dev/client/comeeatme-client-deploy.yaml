@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: comeeatme-client-po
-        image: zooneon/comeeatme-frontend:dev-10
+        image: zooneon/comeeatme-frontend:dev-11
         imagePullPolicy: Always
         resources:
           requests:
